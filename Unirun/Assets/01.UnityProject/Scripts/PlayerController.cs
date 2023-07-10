@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour
             playerRigid.velocity = playerRigid.velocity * 0.5f;
         }
 
+        //isGrounded = false ¼³Á¤
         animator.SetBool("Ground", isGrounded);
     }
 
@@ -66,7 +67,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (0.7f < collision.contacts[0].normal.y)
+        {
+            isGrounded = true;
+            jumpCount = 0;
+        }
+    }
+    private void OnCollisionExit2D(Collision2D collision)
     {
         isGrounded = false;
     }

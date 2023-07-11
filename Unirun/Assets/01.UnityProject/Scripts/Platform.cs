@@ -5,12 +5,14 @@ using UnityEngine;
 public class Platform : MonoBehaviour
 {
     public GameObject[] obstacles;
-    private bool stepped = false;
+    public GameObject[] coins;
+    //private bool stepped = false;
 
     private void OnEnable()
     {
-        stepped = false;
+        //stepped = false;
 
+        //가시 활성화 
         for(int i = 0; i < obstacles.Length; i++)
         {
             if(Random.Range(0,3) == 0)
@@ -20,6 +22,19 @@ public class Platform : MonoBehaviour
             else
             {
                 obstacles[i].SetActive(false);
+            }
+        }
+
+        //코인 활성화
+        for(int j = 0; j < coins.Length;j++)
+        {
+            if (Random.Range(0, 4) == 0)
+            {
+                coins[j].SetActive(true);
+            }
+            else
+            {
+                coins[j].SetActive(false);
             }
         }
     }
@@ -34,14 +49,5 @@ public class Platform : MonoBehaviour
     void Update()
     {
         
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.collider.tag.Equals("Player") && stepped == false)
-        {
-            stepped = true;
-            GameManager.instance.AddScore(1);
-        }
     }
 }

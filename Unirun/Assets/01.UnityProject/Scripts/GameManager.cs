@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     public TMP_Text scoreText;
     public GameObject gameoverUI;
 
+    public Transform myPlayer;
+
     private int score = 0;
 
     //컴포넌트가 존재하는지 여부를 체크하는 함수
@@ -55,6 +57,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //점프 로직
         if(isGameOver == true && Input.GetMouseButtonDown(0))
         {
             SceneManager.LoadScene("PlayScene");

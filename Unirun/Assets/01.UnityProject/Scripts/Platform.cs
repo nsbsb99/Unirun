@@ -6,6 +6,8 @@ public class Platform : MonoBehaviour
 {
     public GameObject[] obstacles;
     public GameObject[] coins;
+    public GameObject[] mushrooms;
+
     //private bool stepped = false;
 
     private void OnEnable()
@@ -35,6 +37,19 @@ public class Platform : MonoBehaviour
             else
             {
                 coins[j].SetActive(false);
+            }
+        }
+
+        //¹ö¼¸ È°¼ºÈ­
+        for (int k = 0; k < mushrooms.Length; k++)
+        {
+            if (Random.Range(0, 6) == 0)
+            {
+                mushrooms[k].SetActive(true);
+            }
+            else
+            {
+                mushrooms[k].SetActive(false);
             }
         }
     }

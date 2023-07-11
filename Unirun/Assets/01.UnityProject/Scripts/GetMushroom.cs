@@ -5,26 +5,40 @@ using UnityEngine;
 public class GetMushroom : MonoBehaviour
 {
     public Transform myPlayer;
-    private float timeBigger;
-    private float finishBigger = 10f;
+    private SpriteRenderer mushroomRender;
 
-    private void Start()
-    {
-        timeBigger = 0f;
-    }
+    //¹ö¼¸ È¹µæ ÈÄ °æ°úÇÑ ½Ã°£
+    public float waitTime;
+
+    //¹ö¼¸ È¹µæ ¿©ºÎ
+    private bool alreadyGet = false;
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.gameObject.CompareTag("Player"))
+        if (collider.gameObject.CompareTag("Player") && alreadyGet == false)
         {
-            this.gameObject.SetActive(false);
+            waitTime = 0;
+            mushroomRender = this.GetComponent<SpriteRenderer>();
+            mushroomRender.enabled = false;
 
-            myPlayer = GameObject.FindObjectOfType<PlayerController>().transform;
-            //Debug.LogFormat("Ä³¸¯ÅÍÀÇ Å©±â: {0}",myPlayer.localScale);
-
+            myPlayer = FindObjectOfType<PlayerController>().transform;
             myPlayer.localScale *= 1.5f;
 
+            alreadyGet = true;
+        }
+    }
 
+    private void Update()
+    {
+        //¹ö¼¸ È¿°ú ³¡³»±â
+        waitTime += Time.deltaTime;
+
+        if (waitTime >= 2 && alreadyGet == true)
+        {
+            myPlayer = FindObjectOfType<PlayerController>().transform;
+            myPlayer.localScale /= 1.5f;
+
+            alreadyGet = false;
         }
     }
 }

@@ -840,6 +840,7 @@ MonoBehaviour:
   isGameOver: 0
   scoreText: {fileID: 1171650741}
   gameoverUI: {fileID: 1698488201}
+  myPlayer: {fileID: 0}
 --- !u!4 &1120315962
 Transform:
   m_ObjectHideFlags: 0
